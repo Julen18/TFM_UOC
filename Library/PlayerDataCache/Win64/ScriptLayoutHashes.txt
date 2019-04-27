@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-D:/TFM/Tfm UOC/Builds/Tfm UOC.exe
+C:/Users/Julen/Desktop/Tfm UOC/TFM_UOC/Builds/Tfm UOC.exe
 SceneListBegin?
 Assets/Scenes/Lobby.unity
 Assets/Scenes/Stage_I.unity
