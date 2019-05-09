@@ -22,6 +22,7 @@ public class EnemyAttack : MainEnemyClass
         if(other.gameObject.tag == "Player")
         {
             this.health = health - 5;
+            this.mana = mana - 5;
             Attack(other);
         }
     }
@@ -31,6 +32,7 @@ public class EnemyAttack : MainEnemyClass
         if (other.GetComponent<PlayerStats>().IsPlayerAlive())
         {
             other.GetComponent<PlayerStats>().TakeDamage(5);
+            other.GetComponent<PlayerStats>().TakeMana(10);
         }
         else{
             return;

@@ -32,7 +32,7 @@ public class PlayerStats : MainPlayerClass
         IsNotServer();
         if (currentHealth > 0)
         {
-            currentHealth -= damage;
+            currentHealth = currentHealth - damage;
             if (currentHealth <= 0)
             {
                 this.GetComponent<PlayerHud>().DeadScreen();//player is dead
@@ -48,10 +48,12 @@ public class PlayerStats : MainPlayerClass
 
     void OnChangeHealth(int health)
     {
+        currentHealth = health;
         this.GetComponent<PlayerHud>().ModifyHud(LIFE_HUD,health);
     }
     void OnChangeMana(int mana)
     {
+        currentMana = mana;//reasign needed
         this.GetComponent<PlayerHud>().ModifyHud(MANA_HUD, mana);
     }
 
@@ -61,5 +63,9 @@ public class PlayerStats : MainPlayerClass
         
     }
 
+    public override void OnStartClient()
+    {
+
+    }
 
 }
