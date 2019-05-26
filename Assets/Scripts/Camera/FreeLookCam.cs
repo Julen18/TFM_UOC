@@ -28,6 +28,8 @@ namespace UnityStandardAssets.Cameras
 		private Quaternion m_PivotTargetRot;
 		private Quaternion m_TransformTargetRot;
 
+        private bool locked;
+
         protected override void Awake()
         {
             base.Awake();
@@ -38,6 +40,7 @@ namespace UnityStandardAssets.Cameras
 
 	        m_PivotTargetRot = m_Pivot.transform.localRotation;
 			m_TransformTargetRot = transform.localRotation;
+            locked = false;
         }
 
 
@@ -69,7 +72,7 @@ namespace UnityStandardAssets.Cameras
 
         private void HandleRotationMovement()
         {
-			if(Time.timeScale < float.Epsilon)
+			if(Time.timeScale < float.Epsilon || locked)
 			return;
 
             // Read the user input
@@ -111,5 +114,12 @@ namespace UnityStandardAssets.Cameras
 				transform.localRotation = m_TransformTargetRot;
 			}
         }
+
+        public void LockPj(bool a)
+        {
+            locked = a;
+        }
     }
+
+    
 }

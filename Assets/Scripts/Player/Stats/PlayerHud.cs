@@ -18,14 +18,15 @@ public class PlayerHud : MainPlayerClass
     public GameObject selectionCanvas;
 
     public GameObject screenDead;
-
+    public LayerMask layer;
     private PlayerStats stats;
-
+    
     private void Awake()
     {
         stats = GetComponent<PlayerStats>();
         SetCanvasSelectionOff();
         screenDead.SetActive(false);
+        layer = ~layer;
     }
     void Update()
     {
@@ -91,7 +92,7 @@ public class PlayerHud : MainPlayerClass
     private void WhatIHaveSelected(RaycastHit hit)
     {
         string tag = hit.transform.gameObject.tag;
-        Debug.Log(tag);
+        //Debug.Log(tag);
         if(tag == "" || tag == "Untagged")
         {
             if (HasSelection())
@@ -119,12 +120,13 @@ public class PlayerHud : MainPlayerClass
     }
     public void ClickMouse()
     {
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward, Color.green);
         if (Input.GetMouseButtonDown(0))//mouse
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        {   
+            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, 100))
+            if (Physics.Raycast(ray, out hit, 100, layer))
             {
                 WhatIHaveSelected(hit);
             }

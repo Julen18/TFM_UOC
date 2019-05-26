@@ -16,11 +16,18 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityAnimator
 
         public override void OnStart()
         {
-            var currentGameObject = GetDefaultGameObject(targetGameObject.Value);
-            if (currentGameObject != prevGameObject) {
-                animator = currentGameObject.GetComponent<Animator>();
-                prevGameObject = currentGameObject;
+            if (targetGameObject.Value = null)
+            {
+                animator = GetComponent<Animator>();
+            } else
+            {
+                var currentGameObject = GetDefaultGameObject(targetGameObject.Value);
+                if (currentGameObject != prevGameObject) {
+                    animator = currentGameObject.GetComponent<Animator>();
+                    prevGameObject = currentGameObject;
+                }
             }
+            
         }
 
         public override TaskStatus OnUpdate()

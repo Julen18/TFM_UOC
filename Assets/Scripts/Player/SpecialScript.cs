@@ -19,7 +19,7 @@ public class SpecialScript : NetworkBehaviour
     {
         if (Input.anyKey) {
             
-            Debug.Log(Input.anyKey);
+            //Debug.Log(Input.anyKey);
         }
         switch (Input.anyKey)
         {

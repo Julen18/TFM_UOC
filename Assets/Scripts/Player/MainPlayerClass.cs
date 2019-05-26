@@ -19,6 +19,7 @@ public abstract class MainPlayerClass : GenericMethodsClass
     public const string GAMECONTROLLER_TAG = "GameController";
     public const string ENEMY_TAG = "Enemy";
     public const string PLAYER_TAG = "Player";
+    public const string NPC_TAG = "NPC_TAG";
 
     protected bool selection = false;
     protected GameObject goSelected = null;
