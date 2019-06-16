@@ -12,12 +12,16 @@ public class MoveToTarget : Action
     public SharedFloat arriveDistance = 0.2f;
     [UnityEngine.Tooltip("The GameObject that the agent is seeking")]
     public SharedTransform target;
+    [UnityEngine.Tooltip("Animation will run")]
+    public SharedString anim;
 
     protected UnityEngine.AI.NavMeshAgent navMeshAgent;
+    private Animator animator;
 
     public override void OnAwake()
     {
         navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
 
     public override void OnStart()
@@ -33,14 +37,25 @@ public class MoveToTarget : Action
     // Return running if the agent hasn't reached the destination yet
     public override TaskStatus OnUpdate()
     {
-        if (HasArrived())
+        if (target == null)
         {
-            return TaskStatus.Success;
+            return TaskStatus.Failure;
+        } else
+        {
+            SetDestination(Target());
+
+            if (HasArrived())
+            {
+                Stop();
+                return TaskStatus.Success;
+            }
+            else
+            {
+                animator.SetTrigger(anim.Value);
+            }
+            return TaskStatus.Running;
         }
-
-        SetDestination(Target());
-
-        return TaskStatus.Running;
+        
     }
 
     // Return targetPosition if target is null
@@ -99,6 +114,7 @@ public class MoveToTarget : Action
         if (navMeshAgent.hasPath)
         {
             navMeshAgent.isStopped = true;
+            animator.ResetTrigger(anim.Value);
         }
     }
 

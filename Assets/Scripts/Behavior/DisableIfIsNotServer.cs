@@ -11,7 +11,7 @@ public class DisableIfIsNotServer : Conditional
     {
         if (!NetworkServer.active)
         {
-            gameObject.GetComponent<BehaviorTree>().enabled = false;
+            gameObject.GetComponent<EnemyManager>().TurnOff();
         }
     }
 

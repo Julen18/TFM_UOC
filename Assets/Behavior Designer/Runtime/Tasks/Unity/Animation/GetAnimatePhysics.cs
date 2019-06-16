@@ -28,7 +28,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityAnimation
         public override TaskStatus OnUpdate()
         {
             if (animation == null) {
-                Debug.LogWarning("Animation is null");
+                //Debug.LogWarning("Animation is null");
                 return TaskStatus.Failure;
             }
 

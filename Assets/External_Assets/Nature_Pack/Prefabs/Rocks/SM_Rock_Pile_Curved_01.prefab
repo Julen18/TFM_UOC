@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33069409178719432}
   - component: {fileID: 23363566668229786}
   - component: {fileID: 95349431255291132}
+  - component: {fileID: 4952291326763754176}
   m_Layer: 0
   m_Name: SM_Rock_Pile_Curved_01
   m_TagString: Untagged
@@ -97,3 +98,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &4952291326763754176
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491004259460544}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.8103733, y: 2.4511468, z: 3.1078033}
+  m_Center: {x: 0.19838715, y: -0.081962824, z: 0.10913849}

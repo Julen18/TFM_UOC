@@ -15,6 +15,10 @@ public class PlayerQuest : MonoBehaviour
 
     public GameObject chld;
     private GameObject cam;
+    private GameObject auxGo;
+    public GameObject faux;
+    public GameObject ply;
+    private GameObject auxTarget;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,22 +33,66 @@ public class PlayerQuest : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && npc_selected)
         {
-            Fill_text();
+           // Fill_text();
         }
-        ClickMouse();
+        DoAction();
+        RayCastAction(); 
     }
     void Fill_text()
     {
         main_text.text = target.GetComponentInChildren<NpcQuest>().GetText();
         cam.GetComponent<FreeLookCam>().LockPj(true);
+        ply.GetComponent<AttacksPlayer>().canAttack = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
     }
-    public void ClickMouse()
+    public void RayCastAction()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 10))
+        {
+            string tag = hit.transform.gameObject.tag;
+            switch (tag)
+            {
+                case "NPC_QUEST":
+                    auxTarget = hit.transform.gameObject;
+                    if (faux.active == false && chld.activeInHierarchy == false)
+                    {
+                        faux.SetActive(true);
+                    }
+                    else if (chld.activeInHierarchy == true)
+                    {
+                        faux.SetActive(false);
+                    }
+
+
+                    break;
+                case "Untagged":
+                    if (auxTarget)
+                    {
+                        auxTarget = null;
+                        faux.SetActive(false);
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            if (auxTarget)
+            {
+                auxTarget = null;
+                faux.SetActive(false);
+            }
+        }
+
+
+    }
+    public void DoAction()
     {
 
-        if (Input.GetMouseButtonDown(0))//mouse
+        if (Input.GetButtonDown("ActionWithEnvironment"))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -59,6 +107,8 @@ public class PlayerQuest : MonoBehaviour
                         chld.gameObject.SetActive(true);
                     }
                     target = hit.transform.gameObject;
+                    hit.transform.gameObject.GetComponent<NpcQuest>().lookAtPlayer(ply);
+                    auxTarget = hit.transform.gameObject;
                     Fill_text();
                     npc_selected = true;
                 }
@@ -81,10 +131,14 @@ public class PlayerQuest : MonoBehaviour
 
                 break;
         }
+        ply.GetComponent<AttacksPlayer>().canAttack = true;
         npc_selected = false;
         chld.gameObject.SetActive(false);
 
     }
+
+
+   
 
 
 }

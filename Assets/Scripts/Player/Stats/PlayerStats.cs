@@ -1,57 +1,72 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class PlayerStats : MainPlayerClass
 {
-    [SyncVar (hook="OnChangeHealth")]
-    public int currentHealth = 100;
+    [SyncVar(hook = "OnChangeHealth")]
+    public float currentHealth = 100;
 
     [SyncVar(hook = "OnChangeMana")]
-    public int currentMana = 75;
+    public float currentMana = 75;
 
     [SyncVar]
-    public int maxMana = 75;//values of life and mana are temporally
+    public float maxMana = 75;//values of life and mana are temporally
     [SyncVar]
-    public int maxHealth = 100;
+    public float maxHealth = 100;
+
+    public Transform fireballSpawn;
+    public GameObject fireballPrefab;
+
+    private ThirdPersonUserControl thirdPersonUserControl;
+    private Animator anim;
+    private AttacksPlayer ap;
 
     void Start()
     {
-        this.GetComponent<PlayerHud>().SetBars();
+        thirdPersonUserControl = GetComponent<ThirdPersonUserControl>();
+        anim = GetComponent<Animator>();
+        GetComponent<PlayerHud>().SetBars();
+        ap = GetComponent<AttacksPlayer>();
     }
 
-    void Update()
-    {
-        IsNotClient();
-    }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
-        IsNotServer();
-        if (currentHealth > 0)
+        if (IsServer())
         {
-            currentHealth = currentHealth - damage;
-            if (currentHealth <= 0)
+            if (currentHealth > 0)
             {
-                this.GetComponent<PlayerHud>().DeadScreen();//player is dead
+                currentHealth = currentHealth - damage;
+                if (currentHealth <= 0)
+                {
+                    currentHealth = 0;
+                    anim.SetTrigger("Dead");
+                    thirdPersonUserControl.enabled = false;
+                    this.GetComponent<PlayerHud>().DeadScreen();//player is dead
+                }
             }
         }
-        
+
     }
-    public void TakeMana(int damage)
+    public void TakeMana(float damage)
     {
-        IsNotServer();
-        currentMana -= damage;
+        if (IsServer())
+        {
+            currentMana -= damage;
+        }
     }
 
-    void OnChangeHealth(int health)
+    void OnChangeHealth(float health)
     {
         currentHealth = health;
-        this.GetComponent<PlayerHud>().ModifyHud(LIFE_HUD,health);
+        this.GetComponent<PlayerHud>().ModifyHud(LIFE_HUD, health);
     }
-    void OnChangeMana(int mana)
+    void OnChangeMana(float mana)
     {
         currentMana = mana;//reasign needed
         this.GetComponent<PlayerHud>().ModifyHud(MANA_HUD, mana);
@@ -59,8 +74,8 @@ public class PlayerStats : MainPlayerClass
 
     public bool IsPlayerAlive()
     {
-       return (currentHealth > 0) ? true : false;
-        
+        return (currentHealth > 0) ? true : false;
+
     }
 
     public override void OnStartClient()
@@ -68,4 +83,16 @@ public class PlayerStats : MainPlayerClass
 
     }
 
+
+    [Command]
+    public void CmdFire()
+    {
+        GameObject fireball = (GameObject)Instantiate(fireballPrefab, fireballSpawn.position, fireballSpawn.rotation);
+        fireball.GetComponent<Rigidbody>().velocity = fireball.transform.forward * 6;
+
+        fireball.SendMessage("SetAttacksPlayers", ap);
+        fireball.SendMessage("SetDamage", ap.GetDamage());
+        NetworkServer.Spawn(fireball);
+        Destroy(fireball, 2.0f);
+    }
 }

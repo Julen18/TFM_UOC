@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 
 namespace BehaviorDesigner.Runtime.Tasks
 {
@@ -15,15 +16,23 @@ namespace BehaviorDesigner.Runtime.Tasks
         [Tooltip("The maximum wait time if random wait is enabled")]
         public SharedFloat randomWaitMax = 1;
 
+        public SharedString animation;
+
         // The time to wait
         private float waitDuration;
         // The time that the task started to wait.
         private float startTime;
         // Remember the time that the task is paused so the time paused doesn't contribute to the wait time.
         private float pauseTime;
+        private Animator anim;
 
         public override void OnStart()
         {
+            anim = GetComponent<Animator>();
+            if (anim != null)
+            {
+                anim.SetTrigger(animation.Value);
+            }
             // Remember the start time.
             startTime = Time.time;
             if (randomWait.Value) {
@@ -35,6 +44,7 @@ namespace BehaviorDesigner.Runtime.Tasks
 
         public override TaskStatus OnUpdate()
         {
+            
             // The task is done waiting if the time waitDuration has elapsed since the task was started.
             if (startTime + waitDuration < Time.time) {
                 return TaskStatus.Success;

@@ -13,8 +13,6 @@ public class PlayerHud : MainPlayerClass
 
     public Slider healthSelectionBar;
     public Text healthSelectionNum;
-    public Slider manaSelectionBar;
-    public Text manaSelectionNum;
     public GameObject selectionCanvas;
 
     public GameObject screenDead;
@@ -40,33 +38,25 @@ public class PlayerHud : MainPlayerClass
 
     private void UpdateHudSelected()
     {
+        float h, mh;
         switch (goSelected.tag)
         {
             case ENEMY_TAG:
-                int h = goSelected.GetComponent<MainEnemyClass>().health;
-                int m = goSelected.GetComponent<MainEnemyClass>().mana;
-                int mh = goSelected.GetComponent<MainEnemyClass>().maxHealth;
-                int mm = goSelected.GetComponent<MainEnemyClass>().maxMana;
+                h = goSelected.GetComponent<EnemyManager>().health;
+                mh = goSelected.GetComponent<EnemyManager>().maxHealth;
                 SetCanvasSelectionOn();
-                SetHudSelection(h, m, mh, mm);
-                break;
-            case GAMECONTROLLER_TAG:
+                SetHudSelection(h, mh);
                 break;
             case PLAYER_TAG:
-                int h2 = goSelected.GetComponent<PlayerStats>().currentHealth;
-                int m2 = goSelected.GetComponent<PlayerStats>().currentMana;
-                int mh2 = goSelected.GetComponent<PlayerStats>().maxHealth;
-                int mm2 = goSelected.GetComponent<PlayerStats>().maxMana;
+                h = goSelected.GetComponent<PlayerStats>().currentHealth;
+                mh = goSelected.GetComponent<PlayerStats>().maxHealth;
                 SetCanvasSelectionOn();
-                SetHudSelection(h2, m2, mh2, mm2);
+                SetHudSelection(h, mh);
                 break;
-            default:
-                break;
-                //nothing
         }
     }
 
-    public void ModifyHud(int key, int value,int maxValue=0)
+    public void ModifyHud(float key, float value, float maxValue =0)
     {
         switch (key)
         {
@@ -82,10 +72,6 @@ public class PlayerHud : MainPlayerClass
                 healthSelectionBar.value = value;
                 healthSelectionBar.maxValue = maxValue;
                 break;
-            case MANA_SELECTION_HUD:
-                manaSelectionBar.value = value;
-                manaSelectionBar.maxValue = maxValue;
-                break;
         }
     }
 
@@ -93,7 +79,7 @@ public class PlayerHud : MainPlayerClass
     {
         string tag = hit.transform.gameObject.tag;
         //Debug.Log(tag);
-        if(tag == "" || tag == "Untagged")
+        if(tag == "" || tag == "Untagged" || hit.transform == transform)
         {
             if (HasSelection())
             {
@@ -111,18 +97,16 @@ public class PlayerHud : MainPlayerClass
         SetHealthBar();
         SetManaBar();
     }
-    private void SetHudSelection(int h, int m, int mh, int mm)
+    private void SetHudSelection(float h,float mh)
     {
         ModifyHud(LIFE_SELECTION_HUD,h,mh);
-        ModifyHud(MANA_SELECTION_HUD,m,mm);
-        SetManaBarSelection(m,mm);
         SetHealthBarSelection(h,mh);
     }
     public void ClickMouse()
     {
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward, Color.green);
-        if (Input.GetMouseButtonDown(0))//mouse
-        {   
+        //if (Input.GetMouseButtonDown(0))//mouse
+        //{   
             Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
             RaycastHit hit;
 
@@ -134,7 +118,7 @@ public class PlayerHud : MainPlayerClass
             {
                 SetCanvasSelectionOff();
             }
-        }
+        //}
     }
 
     //Setters
@@ -144,18 +128,13 @@ public class PlayerHud : MainPlayerClass
     }
     public void SetManaBar()
     {
-        manaNum.text = stats.currentHealth + "/" + stats.maxMana;
+        manaNum.text = stats.currentMana + "/" + stats.maxMana;
     }
 
-    public void SetHealthBarSelection(int h, int hm)
+    public void SetHealthBarSelection(float h, float hm)
     {
         healthSelectionNum.text = h + "/" + hm;
     }
-    public void SetManaBarSelection(int m, int mm)
-    {
-        manaSelectionNum.text = m + "/" + mm;
-    }
-
     public void SetCanvasSelectionOn()
     {
         this.selectionCanvas.SetActive(true);

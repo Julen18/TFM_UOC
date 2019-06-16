@@ -22,12 +22,17 @@ public class PlayerDialogues : MainPlayerClass
     private bool npc_selected;
 
     public GameObject chld;
+    public GameObject ply;
+    private GameObject auxTarget;
+
+    public GameObject faux;
 
     // Start is called before the first frame update
     void Start()
     {
         dialoguesManager = GameObject.Find("Dialogue_Manager");
         chld.SetActive(false);
+        faux.SetActive(false);
     }
 
     // Update is called once per frame
@@ -37,7 +42,8 @@ public class PlayerDialogues : MainPlayerClass
         {
             Next_text();
         }
-        ClickMouse();
+        DoAction();
+        RayCastAction();
 
     }
 
@@ -53,7 +59,7 @@ public class PlayerDialogues : MainPlayerClass
         if(cnt == dialogAux.Count)
         {
             OnOffDialogue(false);
-            
+            auxTarget.GetComponent<Npc_Dialog>().NotlookAtPlayer();
         }
         if(cnt < dialogAux.Count)
         {
@@ -83,17 +89,60 @@ public class PlayerDialogues : MainPlayerClass
         OnOffDialogue(true);
     }
 
+    public void RayCastAction()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 10))
+        {
+            string tag = hit.transform.gameObject.tag;
+            switch (tag)
+            {
+                case "NPC_TAG":
+                    auxTarget = hit.transform.gameObject;
+                    hit.transform.gameObject.GetComponent<Npc_Dialog>().ActiveFocus();
+                    if (faux.active == false && chld.activeInHierarchy == false)
+                    {
+                        faux.SetActive(true);
+                    }else if(chld.activeInHierarchy == true)
+                    {
+                        faux.SetActive(false);
+                    }
+
+                    
+                    break;
+                case "Untagged":
+                    if(auxTarget)
+                    {
+                        auxTarget.transform.gameObject.GetComponent<Npc_Dialog>().RemoveFocus();
+                        auxTarget = null;
+                        faux.SetActive(false);
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            if (auxTarget)
+            {
+                auxTarget.transform.gameObject.GetComponent<Npc_Dialog>().RemoveFocus();
+                auxTarget = null;
+                faux.SetActive(false);
+            }
+        }
 
 
-    public void ClickMouse()
+    }
+
+    public void DoAction()
     {
 
-        if (Input.GetMouseButtonDown(0))//mouse
+        if (Input.GetButtonDown("ActionWithEnvironment"))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, 100))
+            if (Physics.Raycast(ray, out hit, 10))
             {
                 string tag = hit.transform.gameObject.tag;
                 if (tag == "NPC_TAG")
@@ -103,6 +152,8 @@ public class PlayerDialogues : MainPlayerClass
                         chld.gameObject.SetActive(true);
                     }
                     goNpc_name = hit.transform.gameObject.GetComponent<Npc_Dialog>().getNpcName();
+                    hit.transform.gameObject.GetComponent<Npc_Dialog>().lookAtPlayer(ply);
+                    auxTarget = hit.transform.gameObject;
                     Fill_text();
                     npc_selected = true;
                 }

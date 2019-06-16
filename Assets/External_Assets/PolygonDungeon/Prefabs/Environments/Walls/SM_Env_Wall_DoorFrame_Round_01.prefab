@@ -11,12 +11,14 @@ GameObject:
   - component: {fileID: 421208}
   - component: {fileID: 3371094}
   - component: {fileID: 2329274}
+  - component: {fileID: 3383510405085202229}
+  - component: {fileID: 6272899718884857017}
   m_Layer: 0
   m_Name: SM_Env_Wall_DoorFrame_Round_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &421208
 Transform:
@@ -77,3 +79,32 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3383510405085202229
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116930}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.1493545, y: 5.070028, z: 0.42949304}
+  m_Center: {x: -2.4575047, y: 2.5484416, z: 0.06313861}
+--- !u!208 &6272899718884857017
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116930}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.575, y: 2.535, z: 0.215}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -2.4580002, y: 2.548, z: 0.063}
+  m_TimeToStationary: 0.5

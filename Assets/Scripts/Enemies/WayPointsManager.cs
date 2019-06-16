@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-
 public class WayPointsManager : MonoBehaviour
 {
-
     public class WayPoint
     {
         public int ID { get; set; }
@@ -16,13 +15,14 @@ public class WayPointsManager : MonoBehaviour
 
     void Start()
     {
-        Transform[] tChildren = GetComponentsInChildren<Transform>();
-        wayPoints = new WayPoint[tChildren.Length -1];
+        Transform wpManager = transform.Find("WP1");
+        Transform[] tChildren = wpManager.GetComponentsInChildren<Transform>();
+        wayPoints = new WayPoint[tChildren.Length -1 == 0 ? 1 : tChildren.Length - 1];
 
         int i = 0;
         foreach(Transform t in tChildren)
         {
-            if (t != transform)
+            if (t != wpManager)
             {
                 WayPoint p = new WayPoint();
                 p.ID = i;
@@ -64,5 +64,4 @@ public class WayPointsManager : MonoBehaviour
 
         return nWayPoint;
     }
-
 }

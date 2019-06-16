@@ -21,7 +21,7 @@ public class NextWayPointTarget : Action
 
     public override void OnStart()
     {
-        wpManager = GameObject.Find("ManagerEnemies" + zone).GetComponent<WayPointsManager>();
+        wpManager = GameObject.Find(zone.Value).GetComponent<WayPointsManager>();
     }
 
     public override TaskStatus OnUpdate()

@@ -14,6 +14,9 @@ public class Quest_Manager : MonoBehaviour
 
     protected bool current_state;
 
+    protected const string YELLOW_COLOR = "Yellow";
+    protected const string GREEN_COLOR = "Green";
+    protected const string BLUE_COLOR = "Blue";
     //public string 
 
 

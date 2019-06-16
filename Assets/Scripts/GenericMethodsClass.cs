@@ -14,32 +14,15 @@ public abstract class GenericMethodsClass : NetworkBehaviour
         return Random.Range(min, max);
     }
 
-    public void IsNotServer()
-    {
-        if (!isServer)
-        {
-            return;
-        }
-    }
-    public void IsServer()
+    public bool IsServer()
     {
         if (isServer)
         {
-            return;
+            return true;
         }
-    }
-    public void IsNotClient()
-    {
-        if (!isClient)
+        else
         {
-            return;
-        }
-    }
-    public void IsClient()
-    {
-        if (isClient)
-        {
-            return;
+            return false;
         }
     }
     

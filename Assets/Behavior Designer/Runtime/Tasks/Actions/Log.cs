@@ -15,9 +15,9 @@ namespace BehaviorDesigner.Runtime.Tasks
         {
             // Log the text and return success
             if (logError.Value) {
-                Debug.LogError(text);
+                //Debug.LogError(text);
             } else {
-                Debug.Log(text);
+               // Debug.Log(text);
             }
             return TaskStatus.Success;
         }

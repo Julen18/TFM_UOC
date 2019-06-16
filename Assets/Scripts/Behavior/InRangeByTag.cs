@@ -11,8 +11,9 @@ public class InRangeByTag : Conditional
     public SharedString targetTag;
     [Tooltip("The object that is within sight")]
     public SharedTransform returnedTransform;
-    [UnityEngine.Tooltip("If we are going to kill player")]
+    [Tooltip("If we are going to kill player")]
     public SharedBool isGoingToKillPlayer;
+
     private EnemyManager em;
 
     public override void OnStart()
@@ -22,15 +23,22 @@ public class InRangeByTag : Conditional
 
     public override TaskStatus OnUpdate()
     {
-        returnedTransform.Value = em.IsInRange(targetTag.Value);
-        if (returnedTransform.Value != null)
+        List<GameObject> players = em.IsInRange();
+        foreach (GameObject obj in players)
         {
-            isGoingToKillPlayer.Value = true;
-            // Return success if an object was found
-            return TaskStatus.Success;
+            PlayerStats ps = obj.GetComponent<PlayerStats>();
+            if (ps != null)
+            {
+                if (ps.currentHealth > 0)
+                {
+                    returnedTransform.Value = obj.transform;
+                    isGoingToKillPlayer.Value = true;
+                    return TaskStatus.Success;
+                }
+            }
         }
+
         isGoingToKillPlayer.Value = false;
-        // An object is not within sight so return failure
         return TaskStatus.Failure;
     }
 }

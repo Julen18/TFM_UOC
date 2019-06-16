@@ -18,10 +18,6 @@ public class CanSeeByTag : Conditional
     [Tooltip("If we are going to kill player")]
     public SharedBool isGoingToKillPlayer;
 
-    /// <summary>
-    /// Returns success if an object was found otherwise failure
-    /// </summary>
-    /// <returns></returns>
     public override TaskStatus OnUpdate()
     {
         returnedTransform.Value = WithinSight(targetTag.Value, fieldOfViewAngle.Value, viewDistance.Value);
@@ -36,9 +32,6 @@ public class CanSeeByTag : Conditional
         return TaskStatus.Failure;
     }
 
-    /// <summary>
-    /// Determines if the targetObject is within sight of the transform.
-    /// </summary>
     private Transform WithinSight(string targetTag, float fieldOfViewAngle, float viewDistance)
     {
         if (targetTag == "")
@@ -57,7 +50,11 @@ public class CanSeeByTag : Conditional
                 // The hit agent needs to be within view of the current agent
                 if (LineOfSight(players[i]))
                 {
-                    return players[i].transform; // return the target object meaning it is within sight
+                    if (players[i].GetComponent<PlayerStats>().currentHealth > 0)
+                    {
+                        return players[i].transform;
+                    }
+                    // return the target object meaning it is within sight
                 }
             }
         }
@@ -65,14 +62,11 @@ public class CanSeeByTag : Conditional
         return null;
     }
 
-    /// <summary>
-    /// Returns true if the target object is within the line of sight.
-    /// </summary>
     private bool LineOfSight(GameObject targetObject)
     {
         RaycastHit hit;
-        Debug.DrawLine(transform.position, targetObject.transform.position + new Vector3(0, 1.5f, 0), Color.green);
-        if (Physics.Linecast(transform.position, targetObject.transform.position + new Vector3(0, 1.5f, 0), out hit))
+        Debug.DrawLine(transform.position + new Vector3(0, 1.5f, 0), targetObject.transform.position + new Vector3(0, 1.5f, 0), Color.green);
+        if (Physics.Linecast(transform.position + new Vector3(0, 1.5f, 0), targetObject.transform.position + new Vector3(0, 1.5f, 0), out hit))
         {
             if (hit.transform.IsChildOf(targetObject.transform) || targetObject.transform.IsChildOf(hit.transform))
             {
@@ -82,9 +76,6 @@ public class CanSeeByTag : Conditional
         return false;
     }
 
-    /// <summary>
-    /// Draws the line of sight representation
-    /// </summary>
     public override void OnDrawGizmos()
     {
 #if UNITY_EDITOR

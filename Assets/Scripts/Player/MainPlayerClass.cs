@@ -13,7 +13,6 @@ public abstract class MainPlayerClass : GenericMethodsClass
     public const int EXPERIENCE_HUD = 3;
     public const int LEVEL_HUD = 4;
     public const int LIFE_SELECTION_HUD = 5;
-    public const int MANA_SELECTION_HUD = 6;
 
 
     public const string GAMECONTROLLER_TAG = "GameController";
