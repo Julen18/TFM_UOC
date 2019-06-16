@@ -654,6 +654,7 @@
     <Compile Include="Assets\Scripts\Camera\ProtectCameraFromWallClip.cs" />
     <Compile Include="Assets\Scripts\Camera\TargetFieldOfView.cs" />
     <Compile Include="Assets\Scripts\Class\NextWayPoint.cs" />
+    <Compile Include="Assets\Scripts\EndOfStage.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyStats.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyWeapon.cs" />
@@ -684,6 +685,7 @@
     <Compile Include="Assets\Scripts\Player\Weapon.cs" />
     <Compile Include="Assets\Scripts\Quests\Quest_0001\ItemsQuest.cs" />
     <Compile Include="Assets\Scripts\Quests\Quest_0001\NpcQuest.cs" />
+    <Compile Include="Assets\Scripts\st.cs" />
     <Compile Include="Assets\Scripts\Utilities\AxisTouchButton.cs" />
     <Compile Include="Assets\Scripts\Utilities\ButtonHandler.cs" />
     <Compile Include="Assets\Scripts\Utilities\CrossPlatformInputManager.cs" />

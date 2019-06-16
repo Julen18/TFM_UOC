@@ -11,11 +11,13 @@ public class EnemyZoneManager : NetworkBehaviour
     public float minTimeBetweenSpawns;
     public float maxTimeBetweenSpawns;
     public int enemiesToStart;
+    public bool startSpawning;
 
+    private CanvasItemsUIQuest quest;
     private List<Transform> spawnsPoints;
     private List<GameObject> enemiesSpawned;
     private bool canSpawn;
-
+    private int HowManyDeads;
     void Start()
     {
         if (!isServer)
@@ -36,7 +38,9 @@ public class EnemyZoneManager : NetworkBehaviour
                 spawnsPoints.Add(t);
             }
         }
-        StartToSpawn();
+        if (startSpawning) StartToSpawn();
+        HowManyDeads = 0;
+        quest = null;
     }
 
     public void StartToSpawn()
@@ -51,10 +55,14 @@ public class EnemyZoneManager : NetworkBehaviour
                 random = Random.Range(0, t.Count);
 
                 GameObject enemy = (GameObject)Instantiate(enemyPrefab, t[random].position, t[random].rotation);
+                enemy.SendMessage("SetZone", name);
                 NetworkServer.Spawn(enemy);
 
                 t.RemoveAt(random);
-
+                if (t.Count == 0)
+                {
+                    t = spawnsPoints.Select(item => item).ToList(); ;
+                }
                 enemiesSpawned.Add(enemy);
             }
         }
@@ -72,7 +80,8 @@ public class EnemyZoneManager : NetworkBehaviour
                 random = Random.Range(0, spawnsPoints.Count);
 
                 GameObject enemy = (GameObject)Instantiate(enemyPrefab, spawnsPoints[random].position, spawnsPoints[random].rotation);
-                enemy.transform.parent = transform;
+                //enemy.transform.parent = transform;
+                enemy.SendMessage("SetZone", name);
                 NetworkServer.Spawn(enemy);
 
                 enemiesSpawned.Add(enemy);
@@ -90,8 +99,28 @@ public class EnemyZoneManager : NetworkBehaviour
     [Command]
     public void CmdRemoveEnemy(GameObject enemy)
     {
+        if (quest != null)
+        {
+            quest.SetTextKills("Boss", HowManyDeads, enemiesToStart - 1);
+        }
+        HowManyDeads++;
         enemiesSpawned.Remove(enemy);
         StartCoroutine(RemoveEnemy(enemy));
+    }
+
+    public void SetQuest(CanvasItemsUIQuest q)
+    {
+        quest = q;
+    }
+
+    public int TotallyKillSpawns()
+    {
+        return HowManyDeads;
+    }
+
+    public int TotallySpawns()
+    {
+        return enemiesToStart - 1;
     }
 
     IEnumerator RemoveEnemy(GameObject enemy)

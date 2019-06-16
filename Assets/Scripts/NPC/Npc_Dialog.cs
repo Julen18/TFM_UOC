@@ -50,16 +50,16 @@ public class Npc_Dialog : MonoBehaviour
 
     public void ActiveFocus()
     {
-        if (!haloFocus.active)
+       /* if (!haloFocus.active)
         {
             haloFocus.SetActive(true);
-        }
+        }*/
 
     }
 
     public void RemoveFocus()
     {
-        haloFocus.SetActive(false);
+       /* haloFocus.SetActive(false);*/
     }
 
 }

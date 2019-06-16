@@ -15,6 +15,9 @@ public class NpcQuest : Quest_Manager
 
     private int numOfQuestPrivate;
     private int numOfItemsPrivate;
+    public bool flagToDo;
+
+    public GameObject enemyManager;
 
     private enum MyStateOfQuest
     {
@@ -25,7 +28,7 @@ public class NpcQuest : Quest_Manager
 
     public enum MyEnumeratedType
     {
-        isQuestTokill, isQuestToCollect, isQuestToTalk, isQuestInstantiate
+        isQuestTokill, isQuestToCollect, isQuestToTalk, isQuestInstantiate, specialQuest
     }
 
     public MyEnumeratedType option;
@@ -102,11 +105,14 @@ public class NpcQuest : Quest_Manager
             g.GetComponent<BoxCollider>().isTrigger = true;
             g.AddComponent<ItemsQuest>();
             g.GetComponent<ItemsQuest>().SetIsQuest(true);
+            g.GetComponent<ItemsQuest>().ObjNoDestroy();
             g.GetComponent<ItemsQuest>().SetName(goToInstantiate.ToString());
 
             GameObject goParticles = Instantiate(this.particles, g.transform.position, g.transform.rotation);
             goParticles.transform.parent = g.transform;
+
          }
+        numOfItemsPrivate = goToInstantiate.Length;
     }
     private void StartActiveItemPersist()
     {
@@ -183,8 +189,17 @@ public class NpcQuest : Quest_Manager
                 StartActiveItemForCollect();
                 break;
             case MyEnumeratedType.isQuestTokill:
+                ActiveAndDeactiveArray();
+                enemyManager.GetComponent<EnemyZoneManager>().StartToSpawn();
+                enemyManager.GetComponent<EnemyZoneManager>().StopToSpawn();
                 break;
             case MyEnumeratedType.isQuestToTalk:
+                StartActiveItemPersist();
+                GivePlayerItem();
+                break;
+            case MyEnumeratedType.specialQuest:
+                goToActivate[0].GetComponent<SpecialScript>().DoSomething();
+
                 break;
         }
     }
@@ -245,23 +260,47 @@ public class NpcQuest : Quest_Manager
                     case MyEnumeratedType.isQuestInstantiate:
                         {
                             int n = target.GetComponentInChildren<InventoryPlayer>().GetCountItemFromInventoryQuest(this.goToInstantiate[numOfQuestPrivate].name);
-                            if (5 == numOfItemsPrivate)
-                            //if (n == numOfItemsPrivate)
+                            //if (5 == numOfItemsPrivate)
+                            if (n == numOfItemsPrivate)
                             {
                                 this.stateOfQuest = MyStateOfQuest.questDone;
                                 SetColorOfHalo(GREEN_COLOR);
+                                target.gameObject.GetComponentInChildren<CanvasItemsUIQuest>().SetText("");
                             }
                         }
                         break;
                     case MyEnumeratedType.isQuestToCollect:
                             int n1 = target.GetComponentInChildren<InventoryPlayer>().GetCountItemFromInventoryQuest(this.goToInstantiate[numOfQuestPrivate].name);
-                            if (1 == 1)
-                            //if (n == numOfItemsPrivate)
+                            //if (1 == 1)
+                            if (n1 == numOfItemsPrivate)
                             {
                                 this.stateOfQuest = MyStateOfQuest.questDone;
                                 SetColorOfHalo(GREEN_COLOR);
                                 ActiveAndDeactiveArray();
+                                target.gameObject.GetComponentInChildren<CanvasItemsUIQuest>().SetText("");
+                        }
+                        break;
+                    case MyEnumeratedType.isQuestToTalk:
+                        {
+                            SetColorOfHalo(GREEN_COLOR);
+                            this.stateOfQuest = MyStateOfQuest.questDone;
+                            target.gameObject.GetComponentInChildren<CanvasItemsUIQuest>().SetText("");
+                            ActiveAndDeactiveArray();
+                            if (flagToDo)
+                            {
+                                this.gameObject.SetActive(false);
                             }
+                        }
+                        break;
+                    case MyEnumeratedType.isQuestTokill:
+                        {
+                            if(enemyManager.GetComponent<EnemyZoneManager>().TotallySpawns() == enemyManager.GetComponent<EnemyZoneManager>().TotallyKillSpawns())
+                            {
+                                SetColorOfHalo(GREEN_COLOR);
+                                this.stateOfQuest = MyStateOfQuest.questDone;
+                                target.gameObject.GetComponentInChildren<CanvasItemsUIQuest>().SetText("");
+                            }
+                        }
                         break;
                 }
                 break;

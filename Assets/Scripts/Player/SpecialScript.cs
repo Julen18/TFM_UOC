@@ -5,29 +5,36 @@ using UnityEngine.Networking;
 
 public class SpecialScript : NetworkBehaviour
 {
-    private AudioSource audioSourceController;
-    public static AudioClip[] clips;
+
+    public GameObject[] effects;  
 
     void Start()
     {
-        clips = Resources.LoadAll<AudioClip>("Sounds");
-        
         
     }
 
     void Update()
     {
-        if (Input.anyKey) {
-            
-            //Debug.Log(Input.anyKey);
-        }
-        switch (Input.anyKey)
+
+    }
+
+    public void DoSomething()
+    {
+        DelayEffects();
+        
+
+    }
+    public void DelayEffects()
+    {
+        StartCoroutine(DelayE());
+    }
+    IEnumerator DelayE()
+    {
+        foreach (GameObject g in effects)//named instantiate but are go to active
         {
-            /*case KeyCode.Alpha6: Debug.Log("HOLA, pressed 6");
-                break;
-            case 7: Debug.Log("Adios, pressed 7");
-                break;*/
-           
+            yield return new WaitForSeconds(2);
+            g.SetActive(true);
         }
+        Destroy(this.gameObject, 2f);
     }
 }

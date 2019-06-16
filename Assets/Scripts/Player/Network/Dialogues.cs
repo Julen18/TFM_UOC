@@ -141,14 +141,84 @@ public class Dialogues : MainPlayerClass
 
         FillDilaogMaster("Quest_002", new string[]{
             "Me asaltaron unos bandidos y me robaron víveres y una rueda."+
-            "A uno de ellos se les cayó una especie de piedra con una marca roja, mientras desaparecian a través de un portal mágico, igual te sirve. Si quieres pasar por el puente, tendrás que ayudarme a recuperar la rueda, te parece?"
+            "A uno de ellos se les cayó una especie de piedra con una marca roja, mientras desaparecian a través de un portal mágico, igual te sirve. Si quieres pasar por el puente, tendrás que ayudarme a recuperar la rueda, te parece?, ah si, te doy esta espada, tal vez la necesites"
         });
         FillDilaogMaster("Quest_002R", new string[]{
             "Gracias por recuperar la rueda, ahora el puente está transitable."
         });
 
 
+        FillDilaogMaster("Quest_003", new string[]{
+            "Estamos intentando descubrir como destruir esas rocas fuera del bosque, mi hermano menor fué a investigar, nosotros estamos descansando un poco ya que los bandidos no dejan de intentar robarnos."+
+            "Igual el podría ayudarte, aunque si no le traes nada, no creo que te ayude. Ten, te doy este jarro de agua para que se lo lleves, seguro que está sediento, porqué se dejó sus provisiones."
+        });
 
+        FillDilaogMaster("Quest_003R", new string[]{
+            "Espero que des con él"
+        });
+
+        FillDilaogMaster("Quest_004", new string[]{
+            "Te ha dado ese agua mi hermano mayor? Gracias."+
+            "Me encontré un par de bandidos a los que les robé esta llave, creo que abre la puerta de esa base derruida que tienen. Igual ahí dentro encuentras algo o alguien capaz de destruir esas rocas que bloquean el paso."
+        });
+
+        FillDilaogMaster("Quest_004R", new string[]{
+            "Suerte..!"
+        });
+
+        FillDilaogMaster("Quest_005", new string[]{
+            "Gracias por liberarme!"+
+            "¿Cómo, el paso bloqueado? Y que si puedo abrir camino? Bromeas chico? Soy el mejor pirotécnico de todo Mocholo, por eso me apresaron, para que les dijese como crear explosivos. Quemaré esos arboles en un pis pas"
+        });
+        FillDilaogMaster("Quest_005R", new string[]{
+            "Gracias, vamos a desbloquear el paso"
+        });
+
+        FillDilaogMaster("Quest_006", new string[]{
+            "Cuidado no te quemes, le damos?"
+           
+        });
+        FillDilaogMaster("Quest_006R", new string[]{
+            "Visita Mocholo"
+
+        });
+
+        FillDilaogMaster("Quest_007", new string[]{
+            "Quieres llegar al desierto de Shoku? Es por el puente, en dirección oeste desde Mocholo. Pero el puente lo derrumbaron unos maleantes, deberías ir a hechar un vistazo, quizás te digan como pasar al otro lado del rio."
+
+        });
+        FillDilaogMaster("Quest_007R", new string[]{
+            "El puente está al Oeste"
+
+        });
+
+        FillDilaogMaster("Quest_008", new string[]{
+            "Esos maleantes rajaron las maderas, y el puente cayó al agua, no se puede pasar... Hasta que no acabemos con ellos, no podrán empezar las tareas de reconstrucción. Si sabes luchar, deberías ver al Capitán Sparrow, es el que está al mando, dirección este de Mocholo."+
+            "Ten, te doy esta llave de la puerta, ya que la tenemos cerrada por si acaso aparece esa chusma"
+
+        });
+        FillDilaogMaster("Quest_008R", new string[]{
+            "El puente está al Oeste"
+
+        });
+
+        FillDilaogMaster("Quest_009", new string[]{
+            "No podemos aguantar mucho más, quedamos solo nosotros y la segunda caballería que defenderá Mocholo si nosotros caemos. Podrías ayudarnos a acabar con las huéspedes enemigas?"
+
+        });
+        FillDilaogMaster("Quest_009R", new string[]{
+            "Gracias a ti, ahora Mocholo será un lugar tranquilo otra vez."
+
+        });
+
+        FillDilaogMaster("Quest_010", new string[]{
+            "De no ser por tu ayuda, Mocholo ahora podría ser todo cenizas, como Desembarco del Rey. Muchas Gracias, muchacho. "
+
+        });
+        FillDilaogMaster("Quest_010R", new string[]{
+            "Gracias, de verdad, por cierto el puente ya está arreglado, ya puedes viajar a Shoku."
+
+        });
     }
 }
 

@@ -7,10 +7,12 @@ public class EnemyManager : MainEnemyClass
 {
     public float damange;
     public GameObject weapon;
+    public ParticleSystem blood;
 
     private List<GameObject> inRange = new List<GameObject>();
     private List<GameObject> playersBeaten = new List<GameObject>();
     private Animator anim;
+    private string zone;
 
     private void Start()
     {
@@ -61,6 +63,13 @@ public class EnemyManager : MainEnemyClass
         }
     }
 
+    public void SetZone(string z)
+    {
+        BehaviorTree bt = GetComponent<BehaviorTree>();
+        bt.SetVariableValue("Zone", z);
+        zone = z;
+    }
+
     public void TakeDamage(float damage)
     {
         if (IsServer())
@@ -68,12 +77,13 @@ public class EnemyManager : MainEnemyClass
             if (health > 0)
             {
                 health -= damage;
+                blood.Play();
                 if (health <= 0)
                 {
                     health = 0;
                     TurnOff();
                     anim.SetTrigger("Die");
-                    GetComponentInParent<EnemyZoneManager>().CmdRemoveEnemy(gameObject);
+                    GameObject.Find(zone).GetComponent<EnemyZoneManager>().CmdRemoveEnemy(gameObject);
                 }
             }
         }

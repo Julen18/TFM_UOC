@@ -22,13 +22,27 @@ public class CanvasItemsUIQuest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
     }
 
+    public void SetTextKills(string name, int kills, int total)
+    {
+        text.text = name + ": " + kills + "/" + total;
+    }
 
     public void SetText(string name)
     {
-        int count = GimeData(name);
-        text.text = GetTradItem(name) + ": " + count + "/"+total;
+        if (name == "")
+        {
+            text.text = "";
+        }
+        else
+        {
+            int count = GimeData(name);
+            text.text = GetTradItem(name) + ": " + count + "/" + total;
+        }
+        
 
     }
     public void SetTotal(int val)
@@ -64,16 +78,3 @@ public class CanvasItemsUIQuest : MonoBehaviour
     }
 }
 
-/*
-public class TextsObjs
-{
-    public string name;
-    public string text;
-}
-
-            /*if (Input.GetKeyDown(KeyCode.I))
-        {
-            RectTransform panelRectTransform = panel.GetComponent<RectTransform>();
-            panelRectTransform.sizeDelta = new Vector2(panelRectTransform.sizeDelta.x, panelRectTransform.sizeDelta.y + 15);
-            panelRectTransform.localPosition = new Vector3(panelOrigPos.localPosition.x, panelOrigPos.localPosition.y-7.5f, panelOrigPos.localPosition.z);
-        }*/

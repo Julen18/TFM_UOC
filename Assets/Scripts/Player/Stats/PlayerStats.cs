@@ -21,6 +21,7 @@ public class PlayerStats : MainPlayerClass
 
     public Transform fireballSpawn;
     public GameObject fireballPrefab;
+    public ParticleSystem blood;
 
     private ThirdPersonUserControl thirdPersonUserControl;
     private Animator anim;
@@ -32,8 +33,30 @@ public class PlayerStats : MainPlayerClass
         anim = GetComponent<Animator>();
         GetComponent<PlayerHud>().SetBars();
         ap = GetComponent<AttacksPlayer>();
+
+        StartCoroutine("RegMana");
+        StartCoroutine("RegHealth");
     }
 
+    private IEnumerator RegHealth()
+    {
+        while (true)
+        {
+            TakeDamage(-1);
+
+            yield return new WaitForSeconds(0.75f);
+        }
+    }
+
+    private IEnumerator RegMana()
+    {
+        while (true)
+        {
+            TakeMana(-1);
+
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
 
     public void TakeDamage(float damage)
     {
@@ -48,7 +71,11 @@ public class PlayerStats : MainPlayerClass
                     anim.SetTrigger("Dead");
                     thirdPersonUserControl.enabled = false;
                     this.GetComponent<PlayerHud>().DeadScreen();//player is dead
+                } else if (currentHealth > maxHealth)
+                {
+                    currentHealth = maxHealth;
                 }
+                if (damage > 0) blood.Play();
             }
         }
 
@@ -58,6 +85,13 @@ public class PlayerStats : MainPlayerClass
         if (IsServer())
         {
             currentMana -= damage;
+            if (currentMana < 0)
+            {
+                currentMana = 0;
+            } else if (currentMana > maxMana)
+            {
+                currentMana = maxMana;
+            }
         }
     }
 

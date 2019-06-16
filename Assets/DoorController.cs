@@ -5,6 +5,7 @@ using UnityEngine;
 public class DoorController : MonoBehaviour
 {
     public bool requiredKey;
+    public string nameOfKey;
     private string IS_OPENED = "IS_OPENED";
     private string IS_CLOSED = "IS_CLOSED";
 
@@ -24,9 +25,18 @@ public class DoorController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
+
         if(other.tag == "Player")
         {
-            if (this.gameObject.GetComponentInParent<Animator>().GetCurrentAnimatorClipInfo(0).ToString() != dopen)
+            if (requiredKey)
+            {
+                if (CheckPlayerKey(other) && this.gameObject.GetComponentInParent<Animator>().GetCurrentAnimatorClipInfo(0).ToString() != dopen)
+                {
+                    this.gameObject.GetComponentInParent<Animator>().SetBool("OPEN", true);
+                }
+            }
+            else if (this.gameObject.GetComponentInParent<Animator>().GetCurrentAnimatorClipInfo(0).ToString() != dopen)
             {
                 this.gameObject.GetComponentInParent<Animator>().SetBool("OPEN", true);
             }
@@ -37,11 +47,20 @@ public class DoorController : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            if (this.gameObject.GetComponentInParent<Animator>().GetCurrentAnimatorClipInfo(0).ToString() != dclose)
+            if (CheckPlayerKey(other) && this.gameObject.GetComponentInParent<Animator>().GetCurrentAnimatorClipInfo(0).ToString() != dclose)
+            {
+                this.gameObject.GetComponentInParent<Animator>().SetBool("CLOSE", true);
+            }
+            else if (this.gameObject.GetComponentInParent<Animator>().GetCurrentAnimatorClipInfo(0).ToString() != dclose)
             {
                 this.gameObject.GetComponentInParent<Animator>().SetBool("CLOSE", true);
             }
         }
+    }
+
+    private bool CheckPlayerKey(Collider player)
+    {
+        return player.gameObject.GetComponentInChildren<InventoryPlayer>().GetItemFromInventorySpecial(nameOfKey);
     }
 
 

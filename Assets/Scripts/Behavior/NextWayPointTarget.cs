@@ -21,20 +21,33 @@ public class NextWayPointTarget : Action
 
     public override void OnStart()
     {
-        wpManager = GameObject.Find(zone.Value).GetComponent<WayPointsManager>();
+        if (zone.Value != null)
+        {
+            wpManager = GameObject.Find(zone.Value).GetComponent<WayPointsManager>();
+        } else
+        {
+            wpManager = transform.GetComponentInParent<WayPointsManager>();
+        }
     }
 
     public override TaskStatus OnUpdate()
     {
-        if (isGoingToKillPlayer.Value)
+        if (wpManager != null)
         {
-            return TaskStatus.Failure;
+            if (isGoingToKillPlayer.Value)
+            {
+                return TaskStatus.Failure;
+            }
+            else
+            {
+                NextWayPoint wp = wpManager.GetNextWayPoint(transform, lastWayPoint.Value);
+                target.Value = wp.nextPoint;
+                lastWayPoint.Value = wp.idNextWaypoint;
+                return TaskStatus.Success;
+            }
         } else
         {
-            NextWayPoint wp = wpManager.GetNextWayPoint(transform, lastWayPoint.Value);
-            target.Value = wp.nextPoint;
-            lastWayPoint.Value = wp.idNextWaypoint;
-            return TaskStatus.Success;
+            return TaskStatus.Failure;
         }
     }
 }

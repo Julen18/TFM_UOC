@@ -8,11 +8,16 @@ public class ItemsQuest : MonoBehaviour
     private bool isQuest;
     private string nameOfItem;
 
+    private string noDestroy;
+
+    public bool persist = false;
+    public string namepersist;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+      
     }
 
     // Update is called once per frame
@@ -43,9 +48,29 @@ public class ItemsQuest : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
+
+            if (persist)
+            {
+                other.gameObject.GetComponentInChildren<InventoryPlayer>().PutItemInInventorySpecial(namepersist);
+                this.gameObject.SetActive(false);
+                return;
+            }
+
             other.gameObject.GetComponentInChildren<InventoryPlayer>().PutItemOnQuestInv(this.gameObject.name);
 
-            Destroy(this.gameObject);
+            if (noDestroy == "1")
+            {
+                this.gameObject.SetActive(false);
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
+            
         }
+    }
+    public void ObjNoDestroy()
+    {
+        noDestroy = "1";
     }
 }

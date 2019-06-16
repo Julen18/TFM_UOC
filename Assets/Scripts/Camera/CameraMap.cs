@@ -25,7 +25,7 @@ public class CameraMap : MonoBehaviour
         {
             if (!player)
             {
-                player = GameObject.Find("Player(Clone)");
+                player = GameObject.Find("Player(Clone)") ;
             }
             else
             {
@@ -67,7 +67,7 @@ public class CameraMap : MonoBehaviour
         else if (TestRange(x, 73, 141) && TestRange(z, -53, -139)) {
             cameras[1].SetActive(true);
         }
-        else if (TestRange(x, -105, 134) && TestRange(z, -61, -73)) {
+        else if (TestRange(x, -65, 134) && TestRange(z, -61, 1)) {
             cameras[2].SetActive(true);
         }
         else if (TestRange(x, -60, 200) && TestRange(z, -50, 177))
