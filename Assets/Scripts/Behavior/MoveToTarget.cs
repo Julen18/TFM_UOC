@@ -111,6 +111,7 @@ public class MoveToTarget : Action
         if (navMeshAgent.hasPath)
         {
             navMeshAgent.isStopped = true;
+            animator.ResetTrigger(anim.Value);
         }
     }
 

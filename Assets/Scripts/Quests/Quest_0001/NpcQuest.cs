@@ -48,7 +48,7 @@ public class NpcQuest : Quest_Manager
 
         numOfQuestPrivate = 0;//modifyc
         numOfItemsPrivate = 0;
-        dialoguesManager = GameObject.Find("Dialogue_Manager");
+        dialoguesManager = GameObject.Find("DIALOGUES_MANAGER");
         if (dialoguesManager)
         {
             try
@@ -95,7 +95,7 @@ public class NpcQuest : Quest_Manager
     {
         if (!dialoguesManager)
         {
-            dialoguesManager = GameObject.Find("Dialogue_Manager");
+            dialoguesManager = GameObject.Find("DIALOGUES_MANAGER");
 
         }
 
@@ -306,7 +306,7 @@ public class NpcQuest : Quest_Manager
                         break;
                     case MyEnumeratedType.isQuestTokill:
                         {
-                            if (enemyManager.GetComponent<EnemyZoneManager>().TotallySpawns() == enemyManager.GetComponent<EnemyZoneManager>().TotallyKillSpawns())
+                            if ( enemyManager.GetComponent<EnemyZoneManager>().TotallySpawns() == enemyManager.GetComponent<EnemyZoneManager>().TotallyKillSpawns())
                             {
                                 SetColorOfHalo(GREEN_COLOR);
                                 this.stateOfQuest = MyStateOfQuest.questDone;

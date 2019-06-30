@@ -137,7 +137,7 @@ public class PlayerStats : MainPlayerClass
         {
             TakeDamage(-1);
 
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(3f);
         }
     }
 
@@ -147,7 +147,7 @@ public class PlayerStats : MainPlayerClass
         {
             TakeMana(-1);
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f);
         }
     }
 

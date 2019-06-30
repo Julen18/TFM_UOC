@@ -30,7 +30,8 @@ public class PlayerDialogues : MainPlayerClass
     // Start is called before the first frame update
     void Start()
     {
-        dialoguesManager = GameObject.Find("Dialogue_Manager");
+        faux.SetActive(false);
+       // dialoguesManager = GameObject.Find("Dialogue_Manager");
         chld.SetActive(false);
         faux.SetActive(false);
     }
@@ -82,7 +83,7 @@ public class PlayerDialogues : MainPlayerClass
     {
         if (!dialoguesManager)
         {
-            dialoguesManager = GameObject.Find("Dialogue_Manager");
+            dialoguesManager = GameObject.Find("DIALOGUES_MANAGER");
         }
         goNpc_name = name;
         Fill_text();
