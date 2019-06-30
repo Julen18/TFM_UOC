@@ -638,7 +638,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0000013406084}
+  m_AnchoredPosition: {x: 0, y: 0.000016597638}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &523152771
@@ -2566,6 +2566,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: _NetworkManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2804461041734418727, guid: 3e4731be1fe4b2d40b74962029899a81,
+        type: 3}
+      propertyPath: m_PlayerPrefab
+      value: 
+      objectReference: {fileID: 8533086700145936584, guid: 786dbf68c1383fe469c5c31aad6c4966,
+        type: 3}
+    - target: {fileID: 2804461041734418727, guid: 3e4731be1fe4b2d40b74962029899a81,
+        type: 3}
+      propertyPath: m_OnlineScene
+      value: Stage_Online
+      objectReference: {fileID: 0}
     - target: {fileID: 2804461041734418726, guid: 3e4731be1fe4b2d40b74962029899a81,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2621,16 +2632,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2804461041734418727, guid: 3e4731be1fe4b2d40b74962029899a81,
-        type: 3}
-      propertyPath: m_PlayerPrefab
-      value: 
-      objectReference: {fileID: 8533086700145936584, guid: 786dbf68c1383fe469c5c31aad6c4966,
-        type: 3}
     - target: {fileID: 2804461041734418724, guid: 3e4731be1fe4b2d40b74962029899a81,
         type: 3}
       propertyPath: showGUI
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 648430037, guid: 3e4731be1fe4b2d40b74962029899a81, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3e4731be1fe4b2d40b74962029899a81, type: 3}

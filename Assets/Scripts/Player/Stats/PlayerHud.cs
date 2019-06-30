@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class PlayerHud : MainPlayerClass
@@ -28,6 +27,8 @@ public class PlayerHud : MainPlayerClass
     }
     void Update()
     {
+        if (PauseMenu.IsOn) return;
+
         ClickMouse();
         if (HasSelection())
         {

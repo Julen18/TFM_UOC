@@ -14,13 +14,12 @@ public class EnemyManager : MainEnemyClass
     private Animator anim;
     private string zone;
 
+    public AudioSource asource;
+    public AudioClip st;
+
     private void Start()
     {
         anim = GetComponent<Animator>();
-        if (!isServer)
-        {
-            TurnOff();
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -59,6 +58,7 @@ public class EnemyManager : MainEnemyClass
             {
                 playersBeaten.Add(obj);
                 obj.GetComponent<PlayerStats>().TakeDamage(damange);
+                asource.PlayOneShot(st);
             }
         }
     }
@@ -72,8 +72,7 @@ public class EnemyManager : MainEnemyClass
 
     public void TakeDamage(float damage)
     {
-        if (IsServer())
-        {
+
             if (health > 0)
             {
                 health -= damage;
@@ -86,7 +85,6 @@ public class EnemyManager : MainEnemyClass
                     GameObject.Find(zone).GetComponent<EnemyZoneManager>().CmdRemoveEnemy(gameObject);
                 }
             }
-        }
     }
 
     public void TurnOff()

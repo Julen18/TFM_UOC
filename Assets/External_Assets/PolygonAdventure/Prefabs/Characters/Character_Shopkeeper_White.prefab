@@ -450,7 +450,7 @@ GameObject:
   - component: {fileID: 9517826}
   - component: {fileID: 5116761464542638943}
   - component: {fileID: 2030712372}
-  - component: {fileID: 9152805254121055239}
+  - component: {fileID: 7631825423137398494}
   m_Layer: 0
   m_Name: Character_Shopkeeper_White
   m_TagString: NPC_QUEST
@@ -531,14 +531,19 @@ MonoBehaviour:
   yellow: {fileID: 408489818}
   blue: {fileID: 2918377241302074769}
   green: {fileID: 7054010887752709921}
+  flagToDo: 0
+  enemyManager: {fileID: 0}
   option: 3
   particles: {fileID: 174834517845547092, guid: 1d5baf416b19e324ba997d893a2c7e14,
     type: 3}
   goToInstantiate:
   - {fileID: 145914, guid: d7a915fb0c1dc1b4dab87d1268965a0e, type: 3}
-  goToActivate: []
+  goToActivate:
+  - {fileID: 0}
   goToDesactivate: []
---- !u!114 &9152805254121055239
+  goToActivatePersistents: []
+  itemsForPlayerInv: []
+--- !u!114 &7631825423137398494
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -547,23 +552,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 111118}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14773cabdb58c284c9b9be63151bdb1a, type: 3}
+  m_Script: {fileID: 11500000, guid: 627ac3bcc3baeaa4987fab6a6dc9207e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc_name: Quest_001
-  rewards: 0
-  nameOfChar: 
-  dialoguesManager: {fileID: 0}
-  yellow: {fileID: 0}
-  blue: {fileID: 0}
-  green: {fileID: 0}
-  option: 3
-  particles: {fileID: 174834517845547092, guid: 1d5baf416b19e324ba997d893a2c7e14,
-    type: 3}
-  goToInstantiate:
-  - {fileID: 145914, guid: d7a915fb0c1dc1b4dab87d1268965a0e, type: 3}
-  goToActivate: []
-  goToDesactivate: []
 --- !u!1 &111194
 GameObject:
   m_ObjectHideFlags: 0

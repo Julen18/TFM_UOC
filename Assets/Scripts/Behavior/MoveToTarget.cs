@@ -30,6 +30,7 @@ public class MoveToTarget : Action
         navMeshAgent.angularSpeed = angularSpeed.Value;
         navMeshAgent.isStopped = false;
 
+        animator.SetTrigger(anim.Value);
         SetDestination(Target());
     }
 
@@ -48,10 +49,6 @@ public class MoveToTarget : Action
             {
                 Stop();
                 return TaskStatus.Success;
-            }
-            else
-            {
-                animator.SetTrigger(anim.Value);
             }
             return TaskStatus.Running;
         }
@@ -114,7 +111,6 @@ public class MoveToTarget : Action
         if (navMeshAgent.hasPath)
         {
             navMeshAgent.isStopped = true;
-            animator.ResetTrigger(anim.Value);
         }
     }
 

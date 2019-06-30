@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33871297332162350}
   - component: {fileID: 23042400720489564}
   - component: {fileID: 95155234041805258}
+  - component: {fileID: 2860206699817171003}
   m_Layer: 0
   m_Name: SM_Rock_Cluster_Large_01
   m_TagString: Untagged
@@ -97,3 +98,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &2860206699817171003
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334708611183978}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.8, y: 10.8, z: 10.3}
+  m_Center: {x: -0.00000023841858, y: 3.888097, z: 0.00000047683716}

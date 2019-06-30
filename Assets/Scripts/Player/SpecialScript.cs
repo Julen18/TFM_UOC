@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
-public class SpecialScript : NetworkBehaviour
+public class SpecialScript : MonoBehaviour
 {
 
     public GameObject[] effects;  

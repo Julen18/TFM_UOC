@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Networking;
 
-public class EnemyZoneManager : NetworkBehaviour
+public class EnemyZoneManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public int maxNumberOfEnemiesSpawneds;
@@ -20,10 +19,6 @@ public class EnemyZoneManager : NetworkBehaviour
     private int HowManyDeads;
     void Start()
     {
-        if (!isServer)
-        {
-            enabled = false;
-        }
         canSpawn = false;
         enemiesSpawned = new List<GameObject>();
         spawnsPoints = new List<Transform>();
@@ -56,7 +51,6 @@ public class EnemyZoneManager : NetworkBehaviour
 
                 GameObject enemy = (GameObject)Instantiate(enemyPrefab, t[random].position, t[random].rotation);
                 enemy.SendMessage("SetZone", name);
-                NetworkServer.Spawn(enemy);
 
                 t.RemoveAt(random);
                 if (t.Count == 0)
@@ -82,7 +76,6 @@ public class EnemyZoneManager : NetworkBehaviour
                 GameObject enemy = (GameObject)Instantiate(enemyPrefab, spawnsPoints[random].position, spawnsPoints[random].rotation);
                 //enemy.transform.parent = transform;
                 enemy.SendMessage("SetZone", name);
-                NetworkServer.Spawn(enemy);
 
                 enemiesSpawned.Add(enemy);
             }
@@ -96,7 +89,6 @@ public class EnemyZoneManager : NetworkBehaviour
         canSpawn = false;
     }
 
-    [Command]
     public void CmdRemoveEnemy(GameObject enemy)
     {
         if (quest != null)
@@ -126,6 +118,6 @@ public class EnemyZoneManager : NetworkBehaviour
     IEnumerator RemoveEnemy(GameObject enemy)
     {
         yield return new WaitForSeconds(5f);
-        NetworkServer.Destroy(enemy);
+        Destroy(enemy);
     }
 }

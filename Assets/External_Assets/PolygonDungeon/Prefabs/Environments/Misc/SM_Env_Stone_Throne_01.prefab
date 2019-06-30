@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 477042}
   - component: {fileID: 3397992}
   - component: {fileID: 2351080}
+  - component: {fileID: 3327613664701627940}
   m_Layer: 0
   m_Name: SM_Env_Stone_Throne_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &477042
 Transform:
@@ -77,3 +78,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3327613664701627940
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195566}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0973396, y: 1.89001, z: 0.9702797}
+  m_Center: {x: -0.0000009536743, y: 0.9450051, z: 0.0000019073486}

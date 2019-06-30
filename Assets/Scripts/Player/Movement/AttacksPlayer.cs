@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
 public class AttacksPlayer : MonoBehaviour
 {
@@ -24,33 +23,46 @@ public class AttacksPlayer : MonoBehaviour
     private float damage;
     private float manaNeeded;
 
+    public AudioClip fireBall;
+    public AudioClip fireBall3;
+    public AudioClip sword_normal;
+    public AudioClip sword_strong;
+    public AudioClip sword_tornado;
+    public AudioSource aSourceAux;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         ps = GetComponent<PlayerStats>();
         canAttack = true;
-        specialAttackActived = "Attack 2";
+        specialAttackActived = "2";
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (PauseMenu.IsOn) return;
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             specialAttackActived = "2";
+
+
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             specialAttackActived = "3";
+
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             specialAttackActived = "4";
+
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             specialAttackActived = "5";
+            
         }
 
         if (canAttack)
@@ -61,6 +73,8 @@ public class AttacksPlayer : MonoBehaviour
                 {
                     damage = damageBasic;
                     anim.SetTrigger("Attack 1");
+                    aSourceAux.pitch = 1.5f;
+                    SoundsEsp(sword_normal);
                     canAttack = false;
                 }
             }
@@ -71,18 +85,22 @@ public class AttacksPlayer : MonoBehaviour
                     case "2":
                         damage = damageSpecial1;
                         manaNeeded = manaSpecial1;
+                        SoundsEsp(sword_strong);
                         break;
                     case "3":
                         damage = damageSpecial2;
                         manaNeeded = manaSpecial2;
+                        SoundsEsp(sword_tornado);
                         break;
                     case "4":
                         damage = damageSpecial3;
                         manaNeeded = manaSpecial3;
+                        SoundsEsp(fireBall3);
                         break;
                     case "5":
                         damage = damageSpecial4;
                         manaNeeded = manaSpecial4;
+                        SoundsEsp(fireBall);
                         break;
                 }
 
@@ -137,5 +155,11 @@ public class AttacksPlayer : MonoBehaviour
     public float GetDamage()
     {
         return damage;
+    }
+
+    private void SoundsEsp(AudioClip a)
+    {
+        aSourceAux.GetComponent<AudioSource>().PlayOneShot(a);
+        aSourceAux.pitch = 1;
     }
 }

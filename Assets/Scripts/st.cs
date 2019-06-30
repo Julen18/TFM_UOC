@@ -4,19 +4,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class st : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject loading;
 
     // Update is called once per frame
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
         {
-            SceneManager.LoadScene("Stage_I");
+            loading.SetActive(true);
+            SceneManager.LoadSceneAsync("Stage_I");
         }
     }
 }

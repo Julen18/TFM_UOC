@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 476952}
   - component: {fileID: 3396498}
   - component: {fileID: 2390558}
+  - component: {fileID: 2384388047743376142}
   m_Layer: 0
   m_Name: SM_Env_Wall_Pillar_Large_Broken_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &476952
 Transform:
@@ -77,3 +78,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &2384388047743376142
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143484}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.111019, y: 2.802531, z: 2.0984802}
+  m_Center: {x: 0.022580981, y: 1.4012655, z: -0.0053901672}

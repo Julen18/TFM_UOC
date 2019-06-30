@@ -20,7 +20,8 @@ public class CameraMap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        if (PauseMenu.IsOn) return;
+
         if (Input.GetKeyDown(KeyCode.M))
         {
             if (!player)

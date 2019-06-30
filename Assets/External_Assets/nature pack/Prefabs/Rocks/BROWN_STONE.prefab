@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7505180600651198000}
+  - component: {fileID: 4755450706388494119}
   m_Layer: 0
   m_Name: BROWN_STONE
   m_TagString: Untagged
@@ -35,6 +36,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &4755450706388494119
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916687742965914414}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 0}
 --- !u!1 &8369626226712287310
 GameObject:
   m_ObjectHideFlags: 0
@@ -47,6 +62,7 @@ GameObject:
   - component: {fileID: 8384025336011014666}
   - component: {fileID: 8391195307306180984}
   - component: {fileID: 8462352154459100398}
+  - component: {fileID: 1856228944360673853}
   m_Layer: 0
   m_Name: SM_Rock_Cluster_Large_01 (32)
   m_TagString: Untagged
@@ -132,6 +148,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &1856228944360673853
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8369626226712287310}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.9, y: 9.1, z: 8.6}
+  m_Center: {x: -0.000012359884, y: 3.8880975, z: -0.00000051624755}
 --- !u!1 &8369626227284083144
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,6 +173,7 @@ GameObject:
   - component: {fileID: 8384025335414053772}
   - component: {fileID: 8391195306705680638}
   - component: {fileID: 8462352153996873064}
+  - component: {fileID: 9218423910118193394}
   m_Layer: 0
   m_Name: SM_Rock_Cluster_Large_01 (31)
   m_TagString: Untagged
@@ -229,6 +259,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &9218423910118193394
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8369626227284083144}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10.3, y: 9.3, z: 9.8}
+  m_Center: {x: 0.000013901159, y: 3.8880947, z: 0.0000014809041}
 --- !u!1 &8369626227607396115
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,6 +284,7 @@ GameObject:
   - component: {fileID: 8384025335701800279}
   - component: {fileID: 8391195306993559077}
   - component: {fileID: 8462352153680647091}
+  - component: {fileID: 7964754877306220714}
   m_Layer: 0
   m_Name: SM_Rock_Cluster_Large_01 (34)
   m_TagString: Untagged
@@ -326,6 +370,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &7964754877306220714
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8369626227607396115}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.9, y: 9.8, z: 9.6}
+  m_Center: {x: -0.000016573644, y: 3.888099, z: 0.00000022338779}
 --- !u!1 &8369626227921688104
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,6 +395,7 @@ GameObject:
   - component: {fileID: 8384025335110683756}
   - component: {fileID: 8391195306133483294}
   - component: {fileID: 8462352153491659400}
+  - component: {fileID: 4589921713788672420}
   m_Layer: 0
   m_Name: SM_Rock_Cluster_Large_01 (29)
   m_TagString: Untagged
@@ -423,6 +481,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &4589921713788672420
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8369626227921688104}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.4, y: 10.2, z: 9.7}
+  m_Center: {x: -0.00000018048152, y: 3.888098, z: -0.0000022370539}
 --- !u!1 &8369626228028729925
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,6 +506,7 @@ GameObject:
   - component: {fileID: 8384025335213371393}
   - component: {fileID: 8391195306508915571}
   - component: {fileID: 8462352153124579045}
+  - component: {fileID: 2515807733910640020}
   m_Layer: 0
   m_Name: SM_Rock_Cluster_Large_01 (33)
   m_TagString: Untagged
@@ -520,3 +592,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &2515807733910640020
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8369626228028729925}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10.1, y: 8.2, z: 10.6}
+  m_Center: {x: 0.000008756997, y: 3.8880947, z: 0.0000015254006}

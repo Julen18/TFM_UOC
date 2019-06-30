@@ -21,7 +21,7 @@ public class EndOfStage : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene("EndGame");
+            SceneManager.LoadScene("CreditScene");
         }
     }
 }

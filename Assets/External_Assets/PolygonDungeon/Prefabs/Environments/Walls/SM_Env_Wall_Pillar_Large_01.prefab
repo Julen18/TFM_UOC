@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 417952}
   - component: {fileID: 3314454}
   - component: {fileID: 2391360}
+  - component: {fileID: 9201776691537711327}
   m_Layer: 0
   m_Name: SM_Env_Wall_Pillar_Large_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &417952
 Transform:
@@ -77,3 +78,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &9201776691537711327
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161912}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2452621, y: 7.201577, z: 2.1881294}
+  m_Center: {x: 0, y: 3.6007886, z: 0}

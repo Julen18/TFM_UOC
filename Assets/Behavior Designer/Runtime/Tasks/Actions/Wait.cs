@@ -29,7 +29,7 @@ namespace BehaviorDesigner.Runtime.Tasks
         public override void OnStart()
         {
             anim = GetComponent<Animator>();
-            if (anim != null)
+            if (anim != null && animation.Value != null)
             {
                 anim.SetTrigger(animation.Value);
             }

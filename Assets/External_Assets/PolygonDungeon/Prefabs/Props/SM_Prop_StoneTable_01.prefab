@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 405634}
   - component: {fileID: 3320706}
   - component: {fileID: 2386208}
+  - component: {fileID: 3244428944406623129}
   m_Layer: 0
   m_Name: SM_Prop_StoneTable_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &405634
 Transform:
@@ -77,3 +78,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3244428944406623129
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141482}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.47833, y: 0.8309055, z: 1.17732}
+  m_Center: {x: -0.00000500679, y: 0.41664276, z: 0}

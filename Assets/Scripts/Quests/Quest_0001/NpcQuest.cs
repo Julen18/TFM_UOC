@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,9 +20,11 @@ public class NpcQuest : Quest_Manager
 
     public GameObject enemyManager;
 
+    public string colorActived;
+
     private enum MyStateOfQuest
     {
-       haveQuests, questOnProgress, questDone, noMoreQuests
+        haveQuests, questOnProgress, questDone, noMoreQuests
     }
 
     private MyStateOfQuest stateOfQuest;
@@ -48,19 +51,26 @@ public class NpcQuest : Quest_Manager
         dialoguesManager = GameObject.Find("Dialogue_Manager");
         if (dialoguesManager)
         {
-            fillQuestText(dialoguesManager.GetComponent<Dialogues>().GetDictionary(this.getNpcName()).ToArray());
-            fillDoneQuestText(dialoguesManager.GetComponent<Dialogues>().GetDictionary(this.getNpcName() + "R").ToArray());
+            try
+            {
+                fillQuestText(dialoguesManager.GetComponent<Dialogues>().GetDictionary(this.getNpcName()).ToArray());
+                fillDoneQuestText(dialoguesManager.GetComponent<Dialogues>().GetDictionary(this.getNpcName() + "R").ToArray());
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
         //number_of_quests = questTexts.Length;
         last_quest_done = 0;
         stateOfQuest = MyStateOfQuest.haveQuests;
 
-        //MIRAR SI TIENE MAS MISIONES O ESTAN HECHAS
 
-        if(stateOfQuest == MyStateOfQuest.haveQuests)
+        if (stateOfQuest == MyStateOfQuest.haveQuests)
         {
             SetColorOfHalo(YELLOW_COLOR);
-        }else if(stateOfQuest == MyStateOfQuest.noMoreQuests)
+        }
+        else if (stateOfQuest == MyStateOfQuest.noMoreQuests)
         {
             SetColorOfHalo(GREEN_COLOR);
         }
@@ -87,11 +97,12 @@ public class NpcQuest : Quest_Manager
         {
             dialoguesManager = GameObject.Find("Dialogue_Manager");
 
-            if (dialoguesManager)
-            {
-                fillQuestText(dialoguesManager.GetComponent<Dialogues>().GetDictionary(this.getNpcName()).ToArray());
-                fillDoneQuestText(dialoguesManager.GetComponent<Dialogues>().GetDictionary(this.getNpcName() + "R").ToArray());
-            }
+        }
+
+        if (dialoguesManager)
+        {
+            fillQuestText(dialoguesManager.GetComponent<Dialogues>().GetDictionary(this.getNpcName()).ToArray());
+            fillDoneQuestText(dialoguesManager.GetComponent<Dialogues>().GetDictionary(this.getNpcName() + "R").ToArray());
         }
 
     }
@@ -111,7 +122,7 @@ public class NpcQuest : Quest_Manager
             GameObject goParticles = Instantiate(this.particles, g.transform.position, g.transform.rotation);
             goParticles.transform.parent = g.transform;
 
-         }
+        }
         numOfItemsPrivate = goToInstantiate.Length;
     }
     private void StartActiveItemPersist()
@@ -135,8 +146,8 @@ public class NpcQuest : Quest_Manager
     private void StartInstantiateQuest(int numOfQuest)
     {
         this.stateOfQuest = MyStateOfQuest.questOnProgress;
-        string[] arr = dialoguesManager.GetComponent<Dialogues>().GetDictionary(this.getNpcName()+"I").ToArray();
-        for(int i = 0, j=1, y=2; y<arr.Length;)
+        string[] arr = dialoguesManager.GetComponent<Dialogues>().GetDictionary(this.getNpcName() + "I").ToArray();
+        for (int i = 0, j = 1, y = 2; y < arr.Length;)
         {
             GameObject go = Instantiate(this.goToInstantiate[numOfQuest]);
 
@@ -147,15 +158,15 @@ public class NpcQuest : Quest_Manager
             go.GetComponent<ItemsQuest>().SetIsQuest(true);
             go.GetComponent<ItemsQuest>().SetName(goToInstantiate.ToString());
 
-            GameObject goParticles = Instantiate(this.particles, go.transform.position,go.transform.rotation);
+            GameObject goParticles = Instantiate(this.particles, go.transform.position, go.transform.rotation);
             goParticles.transform.parent = go.transform;
-            i = i +3;
+            i = i + 3;
             j = j + 3;
             y = y + 3;
             //se setea un tag de "item_quest_nameOfQuest", cuando el jugador lo detecta, mira a que mision pertenece y suma lo pertinente en el script 
         }
         target.gameObject.GetComponentInChildren<CanvasItemsUIQuest>().SetText(this.goToInstantiate[numOfQuest].name);
-        target.gameObject.GetComponentInChildren<CanvasItemsUIQuest>().SetTotal((arr.Length/3));
+        target.gameObject.GetComponentInChildren<CanvasItemsUIQuest>().SetTotal((arr.Length / 3));
         numOfQuestPrivate = numOfQuest;
         numOfItemsPrivate = arr.Length / 3;
 
@@ -163,7 +174,7 @@ public class NpcQuest : Quest_Manager
 
     private void GivePlayerItem()
     {
-        for (int i=0; i< itemsForPlayerInv.Length; i++)
+        for (int i = 0; i < itemsForPlayerInv.Length; i++)
         {
             target.GetComponentInChildren<InventoryPlayer>().PutItemInInventorySpecial(itemsForPlayerInv[i]);
         }
@@ -204,7 +215,7 @@ public class NpcQuest : Quest_Manager
         }
     }
 
-    
+
     public string GetText()
     {
         CheckInfo();
@@ -221,16 +232,17 @@ public class NpcQuest : Quest_Manager
         else if (this.stateOfQuest == MyStateOfQuest.questDone)
         {
             string beforesum = this.responseTexts[last_quest_done];
-            if (last_quest_done+1 < this.questTexts.Length)//si se sale es que no hay más, no se suma y se deja siempre la respuesta.
+            if (last_quest_done + 1 < this.questTexts.Length)//si se sale es que no hay más, no se suma y se deja siempre la respuesta.
             {
                 last_quest_done++;
                 this.stateOfQuest = MyStateOfQuest.haveQuests;//hay más misioneS
             }
-            else{
+            else
+            {
                 CheckNextQuestOnOtherGO();
             }
             return beforesum;
-           
+
             //si está hecha, mirar texto respuesta o si tiene más, darla.
         }
         return this.questTexts[last_quest_done];
@@ -270,14 +282,14 @@ public class NpcQuest : Quest_Manager
                         }
                         break;
                     case MyEnumeratedType.isQuestToCollect:
-                            int n1 = target.GetComponentInChildren<InventoryPlayer>().GetCountItemFromInventoryQuest(this.goToInstantiate[numOfQuestPrivate].name);
-                            //if (1 == 1)
-                            if (n1 == numOfItemsPrivate)
-                            {
-                                this.stateOfQuest = MyStateOfQuest.questDone;
-                                SetColorOfHalo(GREEN_COLOR);
-                                ActiveAndDeactiveArray();
-                                target.gameObject.GetComponentInChildren<CanvasItemsUIQuest>().SetText("");
+                        int n1 = target.GetComponentInChildren<InventoryPlayer>().GetCountItemFromInventoryQuest(this.goToInstantiate[numOfQuestPrivate].name);
+                        //if (1 == 1)
+                        if (n1 == numOfItemsPrivate)
+                        {
+                            this.stateOfQuest = MyStateOfQuest.questDone;
+                            SetColorOfHalo(GREEN_COLOR);
+                            ActiveAndDeactiveArray();
+                            target.gameObject.GetComponentInChildren<CanvasItemsUIQuest>().SetText("");
                         }
                         break;
                     case MyEnumeratedType.isQuestToTalk:
@@ -294,7 +306,7 @@ public class NpcQuest : Quest_Manager
                         break;
                     case MyEnumeratedType.isQuestTokill:
                         {
-                            if(enemyManager.GetComponent<EnemyZoneManager>().TotallySpawns() == enemyManager.GetComponent<EnemyZoneManager>().TotallyKillSpawns())
+                            if (enemyManager.GetComponent<EnemyZoneManager>().TotallySpawns() == enemyManager.GetComponent<EnemyZoneManager>().TotallyKillSpawns())
                             {
                                 SetColorOfHalo(GREEN_COLOR);
                                 this.stateOfQuest = MyStateOfQuest.questDone;
@@ -308,8 +320,9 @@ public class NpcQuest : Quest_Manager
 
     }
 
-    private void SetColorOfHalo(string color)
+    public void SetColorOfHalo(string color)
     {
+        colorActived = color;
         switch (color)
         {
             case YELLOW_COLOR:
@@ -333,10 +346,11 @@ public class NpcQuest : Quest_Manager
     private void CheckNextQuestOnOtherGO()
     {
         //Look if this go activates another
-        if(goToActivate.Length > 0){
+        if (goToActivate.Length > 0)
+        {
             goToActivate[0].SetActive(true);//acgtive next go
         }
-        
+
     }
     public void lookAtPlayer(GameObject ply)
     {

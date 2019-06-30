@@ -46,12 +46,8 @@ namespace UnityStandardAssets.Cameras
 
         protected void Update()
         {
+            if (PauseMenu.IsOn) return;
             HandleRotationMovement();
-            if (Input.GetKeyDown(KeyCode.Escape))//(m_LockCursor && Input.GetMouseButtonUp(0))
-            {
-                Cursor.lockState = m_LockCursor ? CursorLockMode.Locked : CursorLockMode.None;
-                Cursor.visible = !m_LockCursor;
-            }
         }
 
 
